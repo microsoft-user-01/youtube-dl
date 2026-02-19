@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Settings - Video Downloader</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --bg: #0f0f0f;
+            --surface: #1a1a1a;
+            --surface-light: #262626;
+            --text: #ffffff;
+            --text-muted: #a3a3a3;
+            --error: #ef4444;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0 24px;
+        }
+
+        .back-btn {
+            background: var(--surface);
+            border: none;
+            color: var(--text);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--surface-light);
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .section {
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .status-success {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--success);
+        }
+
+        .status-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        textarea {
+            width: 100%;
+            background: var(--surface-light);
+            border: 1px solid transparent;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 13px;
+            font-family: monospace;
+            color: var(--text);
+            resize: vertical;
+            min-height: 150px;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: var(--primary);
+        }
+
+        textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-danger {
+            background: var(--error);
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .btn-group .btn {
+            margin-top: 0;
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .message.visible {
+            display: block;
+        }
+
+        .message-success {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--success);
+        }
+
+        .message-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+        }
+
+        .instructions {
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            padding: 20px;
+        }
+
+        .instructions h2 {
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        .step {
+            margin-bottom: 16px;
+        }
+
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .step-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.5;
+            padding-left: 32px;
+        }
+
+        code {
+            background: var(--surface-light);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        a {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </a>
+            <h1>Settings</h1>
+        </header>
+
+        <div class="section">
+            <h2 class="section-title">YouTube Cookies</h2>
+            <p class="section-desc">
+                YouTube blocks downloads from cloud servers. Adding your browser cookies allows the app to download as if it were you.
+            </p>
+
+            <div class="status {% if has_cookies %}status-success{% else %}status-warning{% endif %}" id="cookie-status">
+                <span class="status-dot"></span>
+                <span id="status-text">{% if has_cookies %}Cookies configured{% else %}No cookies configured{% endif %}</span>
+            </div>
+
+            <textarea id="cookies-input" placeholder="Paste your cookies here in Netscape format...
+
+# Netscape HTTP Cookie File
+.youtube.com	TRUE	/	TRUE	1234567890	cookie_name	cookie_value
+..."></textarea>
+
+            <div class="btn-group">
+                <button class="btn" onclick="saveCookies()">Save Cookies</button>
+                {% if has_cookies %}
+                <button class="btn btn-danger" onclick="deleteCookies()">Delete</button>
+                {% endif %}
+            </div>
+
+            <div class="message" id="message"></div>
+        </div>
+
+        <div class="instructions">
+            <h2>How to Export Cookies</h2>
+            
+            <div class="step">
+                <div class="step-title"><span class="step-num">1</span>Install Extension</div>
+                <p class="step-desc">
+                    Install a cookie export extension like 
+                    <a href="https://chrome.google.com/webstore/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc" target="_blank">Get cookies.txt LOCALLY</a> (Chrome) or
+                    <a href="https://addons.mozilla.org/en-US/firefox/addon/cookies-txt/" target="_blank">cookies.txt</a> (Firefox)
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-title"><span class="step-num">2</span>Login to YouTube</div>
+                <p class="step-desc">
+                    Go to <a href="https://youtube.com" target="_blank">youtube.com</a> and make sure you're logged in to your account.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-title"><span class="step-num">3</span>Export Cookies</div>
+                <p class="step-desc">
+                    Click the extension icon while on YouTube, then click "Export" or "Get cookies.txt". Copy the entire contents.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-title"><span class="step-num">4</span>Paste & Save</div>
+                <p class="step-desc">
+                    Paste the cookies above and click "Save Cookies". The cookies will be used for all downloads.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function saveCookies() {
+            const cookies = document.getElementById('cookies-input').value.trim();
+            const message = document.getElementById('message');
+            
+            if (!cookies) {
+                showMessage('Please paste your cookies first', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/cookies', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ cookies })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage('Cookies saved successfully!', 'success');
+                    updateStatus(true);
+                    document.getElementById('cookies-input').value = '';
+                } else {
+                    showMessage(data.error || 'Failed to save cookies', 'error');
+                }
+            } catch (err) {
+                showMessage('Network error. Please try again.', 'error');
+            }
+        }
+
+        async function deleteCookies() {
+            if (!confirm('Are you sure you want to delete your cookies?')) return;
+
+            try {
+                const response = await fetch('/api/cookies', { method: 'DELETE' });
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage('Cookies deleted', 'success');
+                    updateStatus(false);
+                } else {
+                    showMessage(data.error || 'Failed to delete cookies', 'error');
+                }
+            } catch (err) {
+                showMessage('Network error. Please try again.', 'error');
+            }
+        }
+
+        function showMessage(text, type) {
+            const message = document.getElementById('message');
+            message.textContent = text;
+            message.className = 'message visible message-' + type;
+            setTimeout(() => message.classList.remove('visible'), 5000);
+        }
+
+        function updateStatus(hasCookies) {
+            const status = document.getElementById('cookie-status');
+            const statusText = document.getElementById('status-text');
+            
+            if (hasCookies) {
+                status.className = 'status status-success';
+                statusText.textContent = 'Cookies configured';
+            } else {
+                status.className = 'status status-warning';
+                statusText.textContent = 'No cookies configured';
+            }
+        }
+    </script>
+</body>
+</html>

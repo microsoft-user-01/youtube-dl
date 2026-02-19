@@ -1,0 +1,45 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Testing
+test/
+*.test.py
+
+# Development
+devscripts/
+docs/
+*.md
+!webapp/README.md
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+Makefile
+setup.py
+setup.cfg
+tox.ini
+.travis.yml
+*.bat
